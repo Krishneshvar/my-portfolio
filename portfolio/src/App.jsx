@@ -1,11 +1,12 @@
-import './App.css';
-import Starter from './components/Starter/Starter';
+import Boot from "./components/Boot";
 
 function App() {
 
   return (
     <>
-      <Starter />
+    <div className="h-dvh w-dvw">
+      <Boot />
+    </div>
     </>
   );
 }
