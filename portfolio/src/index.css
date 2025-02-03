@@ -1,5 +1,1 @@
-body {
-    /* height: 100dvh;
-    width: 100dvw; */
-    background-color: black;
-}
+@import "tailwindcss";
