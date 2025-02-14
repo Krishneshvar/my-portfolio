@@ -3,10 +3,13 @@ import { motion } from "framer-motion"
 import bootMessages from "./bootMessages.js"
 import useBootSequence from "./useBootSequence.js"
 import Prompt from "./Prompt.jsx"
+import Intro from "./Intro.jsx"
 
 export default function Boot() {
   const { currentMessage, isLoading, showPrompt } = useBootSequence()
   const [prompts, setPrompts] = useState([0])  // Track prompts by index
+  const [commandHistory, setCommandHistory] = useState([])  // Store commands
+  const [commandOutputs, setCommandOutputs] = useState([])  // Store outputs
 
   // Automatically scroll to the bottom when a new prompt is added
   const terminalEndRef = useRef(null)
@@ -14,9 +17,15 @@ export default function Boot() {
     terminalEndRef.current?.scrollIntoView()
   }, [prompts])
 
-  // Add new prompt
-  const addPrompt = () => {
-    setPrompts(prev => [...prev, prev.length])
+  // Add new prompt and display the command as output
+  const addPrompt = (newCommand) => {
+    if (newCommand.trim() !== "") {
+      setCommandHistory(prev => [...prev, newCommand])  // Store command
+      setCommandOutputs(prev => [...prev, newCommand])  // Display command
+    }
+    else {
+      setCommandOutputs(prev => [...prev, newCommand])
+    }
   }
 
   const displayedMessages = useMemo(
@@ -58,8 +67,24 @@ export default function Boot() {
           </motion.div>
         )}
         <div className={`flex flex-col justify-end h-full w-full ${showPrompt ? "opacity-100" : "opacity-0"} transition-opacity duration-500`}>
+          <Intro />
+          {commandOutputs.map((output, index) => (
+            <div key={index} className="flex flex-row items-start w-screen">
+              <div>
+                <span className="text-green-500">user</span>
+                <span className="text-white">:</span>
+                <span className="text-blue-500">~</span>
+                <span className="text-white"> $ </span>
+              </div>
+              <span className="ml-2">{output}</span>
+            </div>
+          ))}
           {prompts.map((index) => (
-            <Prompt key={index} onEnter={addPrompt} />
+            <Prompt 
+              key={index} 
+              onEnter={addPrompt} 
+              commandHistory={commandHistory} 
+            />
           ))}
           <div ref={terminalEndRef} />
         </div>
