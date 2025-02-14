@@ -1,84 +1,69 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { motion } from "framer-motion"
 import bootMessages from "./bootMessages.js"
+import useBootSequence from "./useBootSequence.js"
 import Prompt from "./Prompt.jsx"
 
 export default function Boot() {
-  const [currentMessage, setCurrentMessage] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
-  const [isBooting, setIsBooting] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [showHello, setShowHello] = useState(false)
+  const { currentMessage, isLoading, showPrompt } = useBootSequence()
+  const [prompts, setPrompts] = useState([0])  // Track prompts by index
 
+  // Automatically scroll to the bottom when a new prompt is added
+  const terminalEndRef = useRef(null)
   useEffect(() => {
-    if (currentMessage < bootMessages.length) {
-      const randomDelay = Math.floor(Math.random() * (1000 - 200 + 1)) + 200 // Random delay between 200 and 1500 ms
-      const timer = setTimeout(() => {
-        setCurrentMessage(currentMessage + 1)
-      }, randomDelay)
-      return () => clearTimeout(timer)
-    } else if (isLoading) {
-      setIsLoading(false)
-      setIsBooting(true)
-    }
-  }, [currentMessage, isLoading])
+    terminalEndRef.current?.scrollIntoView()
+  }, [prompts])
 
-  useEffect(() => {
-    if (isBooting && progress < 100) {
-      const timer = setTimeout(() => {
-        setProgress(progress + 1)
-      }, 30)
-      return () => clearTimeout(timer)
-    } else if (isBooting && progress === 100) {
-      const timer = setTimeout(() => {
-        setIsBooting(false)
-        setShowHello(true)
-      }, 1000)
-      return () => clearTimeout(timer)
-    }
-  }, [isBooting, progress])
+  // Add new prompt
+  const addPrompt = () => {
+    setPrompts(prev => [...prev, prev.length])
+  }
+
+  const displayedMessages = useMemo(
+    () => bootMessages.slice(0, currentMessage),
+    [currentMessage]
+  )
 
   return (
-    <div className="bg-black text-white font-mono h-screen w-screen p-4 overflow-hidden">
-      {isLoading && (
-        <div className="h-full overflow-hidden relative">
-          <div className="absolute bottom-0 w-full"
+    <div className="bg-black text-white font-mono h-screen w-screen p-4 overflow-auto">
+      <div className="h-full overflow-hidden relative">
+        {isLoading && (
+          <motion.div
+            className="absolute bottom-0 w-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            {bootMessages.slice(0, currentMessage).map((message, index) => (
-              <div key={index} className="mb-1">
-                [<span className={`${message.status === "OK" ? "text-green-500" : message.status === "WARNING" ? "text-yellow-500" : "text-red-500"}`}>
+            {displayedMessages.map((message, index) => (
+              <motion.div
+                key={index}
+                className="mb-1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
+              >
+                [<span
+                  className={`${
+                    message.status === "OK"
+                      ? "text-green-500"
+                      : message.status === "WARNING"
+                      ? "text-yellow-500"
+                      : "text-red-500"
+                  }`}
+                >
                   {message.status}
                 </span>] {message.text}
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      )}
-      {isBooting && (
-        <div className="flex flex-col items-center justify-center h-full">
-          <div className="text-2xl mb-4">Rendering profile...</div>
-          <div className="w-64 h-4 bg-gray-700 overflow-hidden">
-            <motion.div
-              className="h-full bg-green-500"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.1 }}
-            />
-          </div>
-        </div>
-      )}
-      {showHello && (
-        <div className="flex items-center justify-center h-full">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl"
-          >
-            <Prompt />
           </motion.div>
+        )}
+        <div className={`flex flex-col justify-end h-full w-full ${showPrompt ? "opacity-100" : "opacity-0"} transition-opacity duration-500`}>
+          {prompts.map((index) => (
+            <Prompt key={index} onEnter={addPrompt} />
+          ))}
+          <div ref={terminalEndRef} />
         </div>
-      )}
+      </div>
     </div>
   )
 }

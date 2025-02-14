@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-    <div className="h-dvh w-dvw">
+    <div className="min-h-dvh w-dvw">
       <Boot />
     </div>
     </>
