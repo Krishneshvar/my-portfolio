@@ -1,14 +1,9 @@
-import Boot from "./components/Boot";
+import Boot from "./components/Boot"
 
-function App() {
-
+export default function App() {
   return (
-    <>
-    <div className="min-h-dvh w-dvw">
+    <div className="min-h-screen w-full bg-black text-white font-mono overflow-auto">
       <Boot />
     </div>
-    </>
-  );
+  )
 }
-
-export default App;

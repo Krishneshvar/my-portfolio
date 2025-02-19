@@ -13,8 +13,8 @@ function Prompt({ onEnter, commandHistory }) {
     if (event.key === "Enter") {
       event.preventDefault()
       onEnter(inputValue)
-      setInputValue("")  // Clear input after Enter
-      setHistoryIndex(-1)  // Reset index when a new command is entered
+      setInputValue("")
+      setHistoryIndex(-1)
     } else if (event.key === "ArrowUp") {
       event.preventDefault()
       if (historyIndex < commandHistory.length - 1) {
@@ -36,8 +36,8 @@ function Prompt({ onEnter, commandHistory }) {
   }
 
   return (
-    <div className="flex flex-row items-start w-screen">
-      <div>
+    <div className="flex items-start w-full">
+      <div className="flex-shrink-0">
         <span className="text-green-500">user</span>
         <span className="text-white">:</span>
         <span className="text-blue-500">~</span>
@@ -45,7 +45,7 @@ function Prompt({ onEnter, commandHistory }) {
       </div>
       <input
         type="text"
-        className="flex-1 bg-transparent outline-none text-white ml-2"
+        className="flex-grow bg-transparent text-white outline-none ml-2"
         ref={inputRef}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}

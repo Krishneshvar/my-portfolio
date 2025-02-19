@@ -1,52 +1,42 @@
 const Intro = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-black text-white">
-      <div className="w-full text-center">
-        <pre className="whitespace-pre-wrap break-words text-[3vw] sm:text-[2vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-[1vw] leading-tight">
-{`
-██╗░░██╗██╗░░░
-██║░░██║██║░░░
-███████║██║░░░
+    <div className="text-blue-500 mb-6">
+      <pre className="whitespace-pre-wrap break-words text-[3vw] sm:text-[2vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-[1vw] leading-tight">
+        {`
+██╗  ██╗██╗   
+██║░░██║██║   
+███████║██║   
 ██╔══██║██║██╗
 ██║░░██║██║╚█║
-╚═╝░░╚═╝╚═╝░╚╝
+╚═╝  ╚═╝╚═╝ ╚╝
 `}
-        </pre>
+      </pre>
 
-        <pre className="whitespace-pre-wrap break-words text-[3vw] sm:text-[2vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-[1vw] leading-tight">
-{`
-██╗██╗███╗░░░███╗
+      <pre className="whitespace-pre-wrap break-words text-[3vw] sm:text-[2vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-[1vw] leading-tight">
+        {`
+██╗██╗███╗   ███╗
 ██║╚█║████╗░████║
 ██║░╚╝██╔████╔██║
 ██║░░░██║╚██╔╝██║
 ██║░░░██║░╚═╝░██║
-╚═╝░░░╚═╝░░░░░╚═╝
+╚═╝   ╚═╝     ╚═╝
 `}
-        </pre>
+      </pre>
 
-        <pre className="whitespace-pre-wrap break-words text-[2vw] sm:text-[1.5vw] md:text-[1.2vw] lg:text-[1vw] xl:text-[0.8vw] leading-tight">
-{`
-██╗░░██╗██████╗░██╗░██████╗██╗░░██╗
-██║░██╔╝██╔══██╗██║██╔════╝██║░░██║
-█████═╝░██████╔╝██║╚█████╗░███████║
-██╔═██╗░██╔══██╗██║░╚═══██╗██╔══██║
-██║░╚██╗██║░░██║██║██████╔╝██║░░██║
-╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚═════╝░╚═╝░░╚═╝
+      <pre className="whitespace-pre-wrap break-words text-[0.4rem] sm:text-[0.7rem] md:text-[0.85rem] lg:text-md xl:text-lg leading-tight">
+        {`
+██╗░░██╗██████╗░██╗░██████╗██╗░░██╗███╗░░██╗███████╗░██████╗██╗░░██╗██╗░░░██╗░█████╗░██████╗░
+██║░██╔╝██╔══██╗██║██╔════╝██║░░██║████╗░██║██╔════╝██╔════╝██║░░██║██║░░░██║██╔══██╗██╔══██╗
+█████═╝░██████╔╝██║╚█████╗░███████║██╔██╗██║█████╗░░╚█████╗░███████║╚██╗░██╔╝███████║██████╔╝
+██╔═██╗░██╔══██╗██║░╚═══██╗██╔══██║██║╚████║██╔══╝░░░╚═══██╗██╔══██║░╚████╔╝░██╔══██║██╔══██╗
+██║░╚██╗██║░░██║██║██████╔╝██║░░██║██║░╚███║███████╗██████╔╝██║░░██║░░╚██╔╝░░██║░░██║██║░░██║
+╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝
 `}
-        </pre>
+      </pre>
 
-        <pre className="whitespace-pre-wrap break-words text-[2.5vw] sm:text-[2vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-[1vw] leading-tight">
-{`
-█▀▀ █▄░█ ▀█▀ █▀▀ █▀█   █░█ █░█ █▀▀ █░░ █▀█ █░█   █▀▀ █▀█ █▀▄▀█ █▀▄▀█ ▄▀█ █▄░█ █▀▄   █▀▀ █▀█ █▀█   █▀▄▀█ █▀█ █▀█ █▀▀
-██▄ █░▀█ ░█░ ██▄ █▀▄   ░░░ █▀█ ██▄ █▄▄ █▀▀ ░░░   █▄▄ █▄█ █░▀░█ █░▀░█ █▀█ █░▀█ █▄▀   █▀░ █▄█ █▀▄   █░▀░█ █▄█ █▀▄ ██▄
-
-█ █▄░█ █▀▀ █▀█ █▀█ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
-█ █░▀█ █▀░ █▄█ █▀▄ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
-`}
-        </pre>
-      </div>
+      <p className="text-white mt-4">Enter "help" command for more information.</p>
     </div>
   )
 }
 
-export default Intro;
+export default Intro
