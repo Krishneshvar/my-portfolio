@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react"
+import PowerlinePrompt from "./PowerlinePrompt"
 
 function Prompt({ onEnter, commandHistory }) {
   const inputRef = useRef(null)
@@ -12,22 +13,22 @@ function Prompt({ onEnter, commandHistory }) {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault()
-      onEnter(inputValue)
+      // if (inputValue.trim() === "") return
+
+      onEnter(inputValue.trim())
       setInputValue("")
       setHistoryIndex(-1)
     } else if (event.key === "ArrowUp") {
       event.preventDefault()
-      if (historyIndex < commandHistory.length - 1) {
-        const newIndex = historyIndex + 1
-        setHistoryIndex(newIndex)
-        setInputValue(commandHistory[commandHistory.length - 1 - newIndex])
+      if (historyIndex + 1 < commandHistory.length) {
+        setHistoryIndex((prev) => prev + 1)
+        setInputValue(commandHistory[commandHistory.length - 1 - (historyIndex + 1)])
       }
     } else if (event.key === "ArrowDown") {
       event.preventDefault()
       if (historyIndex > 0) {
-        const newIndex = historyIndex - 1
-        setHistoryIndex(newIndex)
-        setInputValue(commandHistory[commandHistory.length - 1 - newIndex])
+        setHistoryIndex((prev) => prev - 1)
+        setInputValue(commandHistory[commandHistory.length - 1 - (historyIndex - 1)])
       } else {
         setHistoryIndex(-1)
         setInputValue("")
@@ -36,21 +37,16 @@ function Prompt({ onEnter, commandHistory }) {
   }
 
   return (
-    <div className="flex items-start w-full">
-      <div className="flex-shrink-0">
-        <span className="text-green-500">user</span>
-        <span className="text-white">:</span>
-        <span className="text-blue-500">~</span>
-        <span className="text-white"> $ </span>
-      </div>
-      <input
-        type="text"
-        className="flex-grow bg-transparent text-white outline-none ml-2"
-        ref={inputRef}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+    <div className="flex flex-row w-full">
+      <PowerlinePrompt path="~/portfolio" git={{ branch: "main", status: "clean" }} />
+        <input
+          type="text"
+          className="flex-grow bg-transparent text-white outline-none ml-6"
+          ref={inputRef}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
     </div>
   )
 }
