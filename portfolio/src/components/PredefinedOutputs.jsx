@@ -1,22 +1,25 @@
 const help = () => {
   const helpText = [
-    "about          : Display information about Krishneshvar",
-    "skills         : Display Krishneshvar's skills",
-    "projects       : Display Krishneshvar's projects",
-    "contact        : Display contact information",
-    "resume         : Display Krishneshvar's resume",
-    "education      : Display Krishneshvar's education",
-    "experience     : Display Krishneshvar's experience",
-    "certifications : Display Krishneshvar's certifications",
-    "help           : Display this help message",
-    "echo           : Display the input text",
-    "clear          : Clear the terminal",
+    "Self explanatory commands:",
+    "about",
+    "skills",
+    "projects",
+    "contact",
+    "resume",
+    "education",
+    "experience",
+    "certifications",
+    " ",
+    "help  : Display this help message",
+    "echo  : Display the input text",
+    "clear : Clear the terminal",
   ] 
   return (
     <>
       {helpText.map((text, index) => (
-        <div key={index} className="mb-1">
+        <div key={index} className="flex flex-wrap mb-1">
           <pre>{text}</pre>
+          {/* {text} */}
         </div>
       ))}
     </>
@@ -27,6 +30,9 @@ const skills = () => {
   const skillSet = [
     "Programming Languages:",
     "C, C++, Java, Python",
+    " ",
+    "Web Technologies:",
+    "HTML, CSS, JavaScript, Node.js",
     " ",
     "Frameworks:",
     "React, Express.js",
@@ -48,4 +54,16 @@ const skills = () => {
   )
 }
 
-export { help, skills }
+const about = () => {
+  return (
+    <>
+      <div className="mb-1">
+        <pre>
+          Krishneshvar is a software developer with experience in web development.
+        </pre>
+      </div>
+    </>
+  )
+}
+
+export { about, help, skills }
