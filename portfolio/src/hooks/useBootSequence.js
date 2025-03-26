@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import bootMessages from "./bootMessages.js"
+import bootMessages from "../utils/bootMessages.js"
 
 export default function useBootSequence() {
   const [currentMessage, setCurrentMessage] = useState(0)

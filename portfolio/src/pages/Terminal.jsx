@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from "react"
-import bootMessages from "./bootMessages.js"
-import useBootSequence from "./useBootSequence.js"
-import Prompt from "./Prompt.jsx"
-import Intro from "./Intro.jsx"
-import { about, help, skills } from "./PredefinedOutputs.jsx"
-import PowerlinePrompt from "./PowerlinePrompt.jsx";
+import bootMessages from "../utils/bootMessages.js"
+import useBootSequence from "../hooks/useBootSequence.js"
+import Prompt from "../components/terminal/Prompt.jsx"
+import Intro from "../components/terminal/Intro.jsx"
+import { about, help, skills } from "../components/terminal/PredefinedOutputs.jsx"
+import PowerlinePrompt from "../components/terminal/PowerlinePrompt.jsx";
 
-export default function Boot() {
+export default function Terminal() {
   const { currentMessage, isLoading, showPrompt } = useBootSequence()
   const [commandHistory, setCommandHistory] = useState([])
   const [commandOutputs, setCommandOutputs] = useState([])

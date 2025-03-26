@@ -1,9 +1,15 @@
-import Boot from "./components/Boot"
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import Modern from "./pages/Modern";
+import Terminal from "./pages/Terminal";
+
+const router = createBrowserRouter([
+  { path: "/", element: <Modern /> },
+  { path: "/terminal", element: <Terminal /> },
+]);
 
 export default function App() {
   return (
-    <div className="min-h-screen w-full bg-black text-white font-mono overflow-auto">
-      <Boot />
-    </div>
-  )
+    <RouterProvider router={router} />
+  );
 }
