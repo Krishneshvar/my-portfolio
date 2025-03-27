@@ -69,7 +69,7 @@ export default function Terminal() {
   const displayedMessages = useMemo(() => bootMessages.slice(0, currentMessage), [currentMessage])
 
   return (
-    <div className="p-4 h-full">
+    <div className="bg-black text-white min-h-screen p-4 h-full">
       {isLoading && (
         <div className="mb-4">
           {displayedMessages.map((message, index) => (
