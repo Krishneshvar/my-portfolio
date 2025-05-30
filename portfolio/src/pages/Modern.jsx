@@ -2,6 +2,8 @@ import NavBar from "../components/modern/NavBar";
 import HeroSection from "../components/modern/HeroSection";
 import Footer from "../components/modern/Footer";
 import SkillsSection from "../components/modern/SkillsSection";
+import ProjectsSection from "../components/modern/ProjectsSection";
+import ContactSection from "../components/modern/ContactSection";
 
 export default function ModernPortfolio() {
   return (
@@ -9,6 +11,8 @@ export default function ModernPortfolio() {
       <NavBar />
       <HeroSection />
       <SkillsSection />
+      <ProjectsSection />
+      <ContactSection />
       <Footer />
     </main>
   );

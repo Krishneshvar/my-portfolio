@@ -1,4 +1,4 @@
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGit, FaGithub, FaLinux, FaDatabase, FaJava } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGit, FaGithub, FaLinux, FaJava } from "react-icons/fa";
 import { SiTailwindcss, SiExpress, SiMysql, SiPostgresql, SiPython, SiC, SiCplusplus, SiFigma } from "react-icons/si";
 
 export default function SkillsSection() {
@@ -33,7 +33,7 @@ export default function SkillsSection() {
   };
 
   return (
-    <section className="min-h-screen w-full flex flex-col items-center justify-center bg-[#537FE7] rounded-t-[2rem] p-6">
+    <section className="min-h-screen w-full flex flex-col items-center justify-center bg-[#537FE7] -mt-6 rounded-t-[2rem] p-6">
       <h2 className="text-3xl font-bold text-white mb-6">Skills</h2>
       <div className="w-full flex flex-wrap justify-center gap-8">
         {Object.entries(skills).map(([category, items]) => (
